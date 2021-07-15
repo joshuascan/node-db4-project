@@ -21,21 +21,19 @@ async function getRecipeById(recipe_id) {
       step_id: row.step_id,
       step_number: row.step_number,
       instructions: row.instructions,
-      ingredients: createIngredients(),
+      ingredients: [],
     });
   });
 
-  const createIngredients = () => {
-    return rows.forEach((row) => {
-      if (row.ingredient_id) {
-        result.steps.ingredients.push({
-          ingredient_id: row.steps.ingredient_id,
-          ingredient_name: row.steps.ingredient_name,
-          quantity: row.steps.quantity,
-        });
-      }
-    });
-  };
+  rows.forEach((row) => {
+    if (row.ingredient_id) {
+      result.steps.ingredients.push({
+        ingredient_id: row.steps.ingredient_id,
+        ingredient_name: row.steps.ingredient_name,
+        quantity: row.steps.quantity,
+      });
+    }
+  });
 
   return result;
 }
